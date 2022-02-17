@@ -5,12 +5,31 @@
 
 
 // si il n y a rien après l URL
-if (isset($_SERVER['PATH_INFO'])==false){
+if (isset($_SERVER['PATH_INFO'])==false   ||  ($_SERVER['PATH_INFO']=="/")      ){
 //   echo "nous sommes dans la page d accueuil";
     // APPEL DU CONTROLLEUR
    include __DIR__.'/../src/controller/HomeController.php';
 
 }
+
+else if ($_SERVER['PATH_INFO']=="/catalog"){
+   
+    include __DIR__.'/../src/controller/CatalogController.php';
+
+
+  //  include __DIR__.'/../templates/Liste_utilisateur.php';
+
+}
+
+else if ($_SERVER['PATH_INFO']=="/add_article"){
+   
+    include __DIR__.'/../src/controller/Add_ArticleController.php';
+
+
+  //  include __DIR__.'/../templates/Liste_utilisateur.php';
+
+}
+
 else if ($_SERVER['PATH_INFO']=="/article"){
    
     echo "nous sommes dans la page des articles";
