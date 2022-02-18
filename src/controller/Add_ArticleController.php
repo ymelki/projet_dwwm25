@@ -7,6 +7,17 @@ function afficher_ajout_article(){
 
 
 function enregistrer_article(){
+    
+    var_dump($_FILES);
+ if(isset($_FILES['photo'])){
+    $tmpName = $_FILES['photo']['tmp_name'];
+    $name = $_FILES['photo']['name'];
+    $size = $_FILES['photo']['size'];
+    $error = $_FILES['photo']['error'];
+
+    move_uploaded_file($tmpName, $_SERVER["DOCUMENT_ROOT"]."/img/".$name);
+ }
+
 
     // recuperer  l entité article
     include __DIR__.'/../entity/Article.php';
@@ -25,7 +36,7 @@ function enregistrer_article(){
     }
 
     if ($_POST['prix']==""){
-        $erreur_prix="<br /> - Vous n'avez pas entré de Prix";
+        $erreur_prix="<br />     - Vous n'avez pas entré de Prix";
     }
 
     if (  ($_POST['titre']=="") || ($_POST['description']=="") || ($_POST['prix']=="")  ) {
@@ -33,6 +44,7 @@ function enregistrer_article(){
         include __DIR__.'/../../template/ViewAddArticle.php';
         return ;
     }
+
     $entry = new Article;
     $entry->titre = $_POST['titre'];
     $entry->description = $_POST['description'];
