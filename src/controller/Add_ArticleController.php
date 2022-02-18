@@ -9,14 +9,14 @@ function afficher_ajout_article(){
 function enregistrer_article(){
     
     var_dump($_FILES);
- if(isset($_FILES['photo'])){
-    $tmpName = $_FILES['photo']['tmp_name'];
-    $name = $_FILES['photo']['name'];
-    $size = $_FILES['photo']['size'];
-    $error = $_FILES['photo']['error'];
+     if(isset($_FILES['photo'])){
+        $tmpName = $_FILES['photo']['tmp_name'];
+        $name = $_FILES['photo']['name'];
+        $size = $_FILES['photo']['size'];
+        $error = $_FILES['photo']['error'];
 
-    move_uploaded_file($tmpName, $_SERVER["DOCUMENT_ROOT"]."/img/".$name);
- }
+        move_uploaded_file($tmpName, $_SERVER["DOCUMENT_ROOT"]."/img/".$name);
+    }
 
 
     // recuperer  l entité article
@@ -49,7 +49,7 @@ function enregistrer_article(){
     $entry->titre = $_POST['titre'];
     $entry->description = $_POST['description'];
     $entry->prix =$_POST['prix'];
-    $entry->image = "";
+    $entry->image = $name;
     $entry->save();
 
 
