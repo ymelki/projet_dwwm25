@@ -25,11 +25,16 @@ else if ($_SERVER['PATH_INFO']=="/add_article"){
    
     include __DIR__.'/../src/controller/Add_ArticleController.php';
 
-
+    afficher_ajout_article();
   //  include __DIR__.'/../templates/Liste_utilisateur.php';
 
 }
+else if ($_SERVER['PATH_INFO']=="/enregistrer_article"){
+    include __DIR__.'/../src/controller/Add_ArticleController.php';
+    enregistrer_article();
 
+
+}
 else if ($_SERVER['PATH_INFO']=="/article"){
    
     echo "nous sommes dans la page des articles";
@@ -43,6 +48,9 @@ else if ($_SERVER['PATH_INFO']=="/article"){
 else if ($_SERVER['PATH_INFO']=="/creer_article"){
     echo "nous sommes dans la page des articles à créé";
 }
+
+
+
 else {
     echo "page d erreur";
 }
