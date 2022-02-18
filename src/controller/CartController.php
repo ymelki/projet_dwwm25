@@ -12,18 +12,36 @@ $quantite=$_POST['quantite'];
 // recuperer  l entité article et une ligne de panier
 include __DIR__.'/../entity/Article.php';
 include __DIR__.'/../entity/row_cart.php';
+include __DIR__.'/../entity/cart.php     ';
  
-// alimenter le panier
-// on créé un panier
+ 
+// on créé une ligne du panier
 $my_row_cart=new row_cart();
 // on insérer l'article dans la variable article grâce à l'ORM
 $my_row_cart->article= Article::retrieveByPK($id_article);
 $my_row_cart->quantite=$quantite ;
 $my_row_cart->prix_total=$quantite*$my_row_cart->article->prix; 
 
-var_dump($my_row_cart);
+
+
+echo "<br />";echo "<br />";echo "<br />";echo "<br />";
+ 
 
 // il faut construire ensuite le panier complet
+// on prend le cas ou le panier est vide car pas de cookies
+$moncart=new cart();
+$moncart->row_cart=$my_row_cart;
+$moncart->total=$my_row_cart->prix_total;
+
+// on doit convertir notre objet en chaine de caractere
+$mon_cart_encode=json_encode($moncart);
 // il faut faire le cookie
-// 
+setcookie("cart",$mon_cart_encode) ;
+// on créé un cookie qui s'appelle 
+// "cart" le nom qu on veut
+// deuxieme parametre ce qu on veut stocker
+// renvoie la vue
+include __DIR__.'/../../template/Viewcart.php';
+
+
 
