@@ -10,9 +10,9 @@
                 <div class="card-body">
                     <p class="card-text">Article : <?=$monarticle->titre ?></p>
 
-                    <form method="POST" action="add_cart">
+                    <form method="POST" action="/add_cart">
                         <input type="hidden" value="<?=$monarticle->id ?>" name="id">
-                        Quantité<input type="number" name="quantité" value=1 min=1 max=10>
+                        Quantité<input type="number" name="quantite" value=1 min=1 max=10>
                         <input type="submit" value="Ajouter au panier">
                     </form>
                 </div>
