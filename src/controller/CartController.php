@@ -2,6 +2,7 @@
 
 function clear_cart(){
     setcookie("cart",null);
+    unset($_COOKIE['cart']);
     include __DIR__.'/../../template/Viewcart.php';
 }
 
@@ -18,6 +19,9 @@ function my_cart(){
     include __DIR__.'/../../template/Viewcart.php';
 }
 function generate_cart(){
+
+
+    // Si il n'existe 
 //var_dump($_POST);
 
 // on recuperer l identifiant de l'article...
@@ -31,35 +35,58 @@ $quantite=$_POST['quantite'];
 include __DIR__.'/../entity/Article.php';
 include __DIR__.'/../entity/row_cart.php';
 include __DIR__.'/../entity/cart.php     ';
+
+
+
+    // Si le panier existe deja 
+    // Travallier le panier existant
+
+    if (isset($_COOKIE['cart'])){
+
+         // Je recupere le cookie
+        $my_cart_string=$_COOKIE['cart'];
+        //je convertie en objet panier
+        $moncart=json_decode($my_cart_string); 
+
+    }
+    else {
+     
+        // il faut construire ensuite le panier complet
+        // on prend le cas ou le panier est vide car pas de cookies
+        $moncart=new cart();
+        $moncart->row_cart=[];
+        $moncart->total=0;
+    }
  
- 
-// on créé une ligne du panier
-$my_row_cart=new row_cart();
-// on insérer l'article dans la variable article grâce à l'ORM
-$my_row_cart->article= Article::retrieveByPK($id_article);
-$my_row_cart->quantite=$quantite ;
-$my_row_cart->prix_total=$quantite*$my_row_cart->article->prix; 
+    
+    // on créé une ligne du panier
+    $my_row_cart=new row_cart();
+    // on insérer l'article dans la variable article grâce à l'ORM
+    $my_row_cart->article= Article::retrieveByPK($id_article);
+    $my_row_cart->quantite=$quantite ;
+    $my_row_cart->prix_total=$quantite*$my_row_cart->article->prix; 
 
 
+    // avant de rajouter si il est dans le panier ou pas ? Si il est dedans 
+    // juste rajouter la quantité
+    // si non je fais le array push
+    // Ajouter dans le panier
+    array_push($moncart->row_cart, $my_row_cart);
 
-echo "<br />";echo "<br />";echo "<br />";echo "<br />";
- 
+    $moncart->total=$my_row_cart->prix_total;
 
-// il faut construire ensuite le panier complet
-// on prend le cas ou le panier est vide car pas de cookies
-$moncart=new cart();
-$moncart->row_cart=$my_row_cart;
-$moncart->total=$my_row_cart->prix_total;
+    // on doit convertir notre objet en chaine de caractere
+    $mon_cart_encode=json_encode($moncart);
+    // il faut faire le cookie
+    setcookie("cart",$mon_cart_encode) ;
+    // on créé un cookie qui s'appelle 
+    // "cart" le nom qu on veut
+    // deuxieme parametre ce qu on veut stocker
+    // renvoie la vue
 
-// on doit convertir notre objet en chaine de caractere
-$mon_cart_encode=json_encode($moncart);
-// il faut faire le cookie
-setcookie("cart",$mon_cart_encode) ;
-// on créé un cookie qui s'appelle 
-// "cart" le nom qu on veut
-// deuxieme parametre ce qu on veut stocker
-// renvoie la vue
-include __DIR__.'/../../template/Viewcart.php';
-}
+    include __DIR__.'/../../template/Viewcart.php';
+    }
+
+
 
 

@@ -19,13 +19,13 @@
   </thead>
   <tbody>
       
-  <?php foreach ($moncart as $entry ) { ?>
+  <?php foreach ($moncart->row_cart as $entry ) { ?>
     <tr>
       <th scope="row"><?=$entry->article->id; ?></th>
       <td><?=$entry->article->titre; ?></td>
       <td><?=$entry->article->description; ?></td>
       <td><?=$entry->article->prix; ?></td>
-      <td><?=$entry->article->image; ?></td>
+      <td><img src=http://localhost:3000/img/<?=$entry->article->image; ?> width="50px"></td>
       <td><?=$entry->quantite; ?></td>
       <td><?=$entry->prix_total; ?></td> 
     </tr> 
