@@ -1,5 +1,17 @@
 <?php
+// Afficher le panier. Je recupere le cookie que je convertie en objet panier
+function my_cart(){
+  
+  // renvoyer le cookie 
 
+    // Je recupere le cookie
+    $my_cart_string=$_COOKIE['cart'];
+    //je convertie en objet panier
+    $moncart=json_decode($my_cart_string); 
+   
+    include __DIR__.'/../../template/Viewcart.php';
+}
+function generate_cart(){
 //var_dump($_POST);
 
 // on recuperer l identifiant de l'article...
@@ -42,6 +54,6 @@ setcookie("cart",$mon_cart_encode) ;
 // deuxieme parametre ce qu on veut stocker
 // renvoie la vue
 include __DIR__.'/../../template/Viewcart.php';
-
+}
 
 

@@ -28,7 +28,7 @@
           <a class="nav-link" href="/add_article">Add article</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/add_cart">Cart</a>
+          <a class="nav-link" href="/my_cart">My cart</a>
         </li>
       </ul>
     </div>

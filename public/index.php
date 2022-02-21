@@ -24,8 +24,18 @@ else if ($_SERVER['PATH_INFO']=="/catalog"){
 else if ($_SERVER['PATH_INFO']=="/add_cart"){
    
   include __DIR__.'/../src/controller/CartController.php';
+  generate_cart();
+
+//  include __DIR__.'/../templates/Liste_utilisateur.php';
+
+}
 
 
+else if ($_SERVER['PATH_INFO']=="/my_cart"){
+   
+  include __DIR__.'/../src/controller/CartController.php';
+
+  my_cart();
 //  include __DIR__.'/../templates/Liste_utilisateur.php';
 
 }

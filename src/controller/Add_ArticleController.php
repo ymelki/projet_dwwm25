@@ -1,7 +1,7 @@
 <?php
 
 function afficher_ajout_article(){
-    // affiche une vue
+    // affiche une vue du formulaire
     include __DIR__.'/../../template/ViewAddArticle.php';
 }
 
