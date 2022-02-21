@@ -1,4 +1,10 @@
 <?php
+
+function clear_cart(){
+    setcookie("cart",null);
+    include __DIR__.'/../../template/Viewcart.php';
+}
+
 // Afficher le panier. Je recupere le cookie que je convertie en objet panier
 function my_cart(){
   

@@ -2,6 +2,9 @@
     <h1>Mon panier</h1>
     <br /> 
 
+
+    <a href="/clear_cart"><button type="button" class="btn btn-primary">Vider le panier</button></a>
+
    <table class="table">
   <thead>
     <tr>

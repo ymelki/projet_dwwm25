@@ -40,6 +40,16 @@ else if ($_SERVER['PATH_INFO']=="/my_cart"){
 
 }
 
+else if ($_SERVER['PATH_INFO']=="/clear_cart"){
+   
+  include __DIR__.'/../src/controller/CartController.php';
+
+  clear_cart();
+//  include __DIR__.'/../templates/Liste_utilisateur.php';
+
+}
+
+
 else if ($_SERVER['PATH_INFO']=="/add_article"){
    
     include __DIR__.'/../src/controller/Add_ArticleController.php';
