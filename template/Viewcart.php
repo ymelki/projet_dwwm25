@@ -34,4 +34,7 @@
   </tbody>
 </table>
 Total : <?=$moncart->total ?>
+
+<a href="/order"><button type="button" class="btn btn-primary">Passer la commande ! </button></a>
+
 <?php include "footer.php"; ?>
