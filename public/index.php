@@ -48,6 +48,15 @@ else if ($_SERVER['PATH_INFO']=="/clear_cart"){
 //  include __DIR__.'/../templates/Liste_utilisateur.php';
 
 }
+else if ($_SERVER['PATH_INFO']=="/order"){
+   
+  include __DIR__.'/../src/controller/CartController.php';
+
+  validate();
+//  include __DIR__.'/../templates/Liste_utilisateur.php';
+
+}
+
 
 
 else if ($_SERVER['PATH_INFO']=="/add_article"){

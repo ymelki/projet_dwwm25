@@ -1,5 +1,34 @@
 <?php
+function validate(){
+      // Je recupere le cookie
+      $my_cart_string=$_COOKIE['cart'];
+      //je convertie en objet panier
+      $moncart=json_decode($my_cart_string); 
+ 
+    // les entité nécessaire
+    include __DIR__.'/../entity/Commande_ligne.php';
+    include __DIR__.'/../entity/Commande.php';
 
+    $macommande=new Commande();
+    $macommande->prix_total=$moncart->total;
+    $macommande->save();
+
+    foreach ($moncart->row_cart as $entry) {
+
+        $maligne_commande=new Commande_ligne();
+        $maligne_commande->id_article=$entry->article->id;
+        $maligne_commande->quantite=$entry->quantite;
+        $maligne_commande->prix=$entry->prix_total;
+        $maligne_commande->id_commande=$macommande->id;
+        $maligne_commande->save();
+    }
+    clear_cart();
+
+
+
+
+
+}
 function clear_cart(){
     setcookie("cart",null);
     unset($_COOKIE['cart']);

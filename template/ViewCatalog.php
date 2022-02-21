@@ -2,10 +2,14 @@
     <h1>Catalog</h1>
     <br />
     <br />  
+
+    <div class="container">
+        <div class="row">
     <?php foreach ($entry as $monarticle ) { ?>
     
-        <div class="col-sm-6">
-            <div class="card" style="width: 18rem;">
+
+ 
+           <div class="card col-sm" style="width: 18rem;">
                 <img src="http://localhost:3000/img/<?=$monarticle->image ?>" class="card-img-top" alt="...">
                 <div class="card-body">
                     <p class="card-text">Article : <?=$monarticle->titre ?></p>
@@ -17,7 +21,9 @@
                     </form>
                 </div>
             </div>
-        </div>
-   
-    <?php } ?>   
+      
+    <?php } ?> 
+    
+    </div>
+</div>
 <?php include "footer.php"; ?>
