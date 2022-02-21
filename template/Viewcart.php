@@ -15,6 +15,7 @@
       <th scope="col">image</th>
       <th scope="col">Quantité</th>
       <th scope="col">Prix_total</th>
+      <th scope="col">Supprimer</th>
     </tr>
   </thead>
   <tbody>
@@ -28,6 +29,7 @@
       <td><img src=http://localhost:3000/img/<?=$entry->article->image; ?> width="50px"></td>
       <td><?=$entry->quantite; ?></td>
       <td><?=$entry->prix_total; ?></td> 
+      <td><a href="/supprimer?id=<?=$entry->article->id; ?>">Supprimer</a></td> 
     </tr> 
     <?php } ?>   
 

@@ -56,7 +56,14 @@ else if ($_SERVER['PATH_INFO']=="/order"){
 //  include __DIR__.'/../templates/Liste_utilisateur.php';
 
 }
+else if ($_SERVER['PATH_INFO']=="/supprimer"){
+   
+  include __DIR__.'/../src/controller/CartController.php';
 
+  remove();
+//  include __DIR__.'/../templates/Liste_utilisateur.php';
+
+}
 
 
 else if ($_SERVER['PATH_INFO']=="/add_article"){

@@ -1,4 +1,36 @@
 <?php
+
+function remove(){
+     // Je recupere le cookie
+     $my_cart_string=$_COOKIE['cart'];
+     //je convertie en objet panier
+     $moncart=json_decode($my_cart_string); 
+
+     $id=$_GET['id'];
+
+     echo $id;
+     foreach($moncart->row_cart as $row){
+ 
+        // Si on trouve que l'ID envoyé en POST est identique à l'ID presént dans le cookie
+        if ($row->article->id ==  $id) {
+            unset($row);
+
+                 
+            // on doit convertir notre objet en chaine de caractere
+            $mon_cart_encode=json_encode($moncart);
+            // il faut faire le cookie
+            setcookie("cart",$mon_cart_encode) ;
+
+           include __DIR__.'/../../template/Viewcart.php';
+
+           return;
+        }
+    }
+
+     // Mon objet $moncart on puisse supprimer la ligne correspondant à cet id
+    // unset($moncart->row_cart 
+
+}
 function validate(){
       // Je recupere le cookie
       $my_cart_string=$_COOKIE['cart'];
@@ -23,12 +55,9 @@ function validate(){
         $maligne_commande->save();
     }
     clear_cart();
-
-
-
-
-
 }
+
+
 function clear_cart(){
     setcookie("cart",null);
     unset($_COOKIE['cart']);
