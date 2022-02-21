@@ -8,6 +8,7 @@ function clear_cart(){
 
 // Afficher le panier. Je recupere le cookie que je convertie en objet panier
 function my_cart(){
+    
   
   // renvoyer le cookie 
 
@@ -16,6 +17,8 @@ function my_cart(){
     //je convertie en objet panier
     $moncart=json_decode($my_cart_string); 
    
+
+  
     include __DIR__.'/../../template/Viewcart.php';
 }
 function generate_cart(){
@@ -27,7 +30,7 @@ function generate_cart(){
 // on recuperer l identifiant de l'article...
 
 // on recuperer l'identifiant de l'article selectionné
-$id_article=$_POST['id'];
+$id_article=(int)$_POST['id'];
 // on recuperer la quantité de l'article selectionné
 $quantite=$_POST['quantite'];
 
@@ -54,6 +57,7 @@ include __DIR__.'/../entity/cart.php     ';
         // il faut construire ensuite le panier complet
         // on prend le cas ou le panier est vide car pas de cookies
         $moncart=new cart();
+        // initialise le panier row_cart comme un tableau
         $moncart->row_cart=[];
         $moncart->total=0;
     }
@@ -68,12 +72,45 @@ include __DIR__.'/../entity/cart.php     ';
 
 
     // avant de rajouter si il est dans le panier ou pas ? Si il est dedans 
-    // juste rajouter la quantité
+    // juste rajouter la quantité 
+
+   // pacourir mon panier et verifier j'ai l 'id que je veux rajouter
+   foreach($moncart->row_cart as $row){
+ 
+       // Si on trouve que l'ID envoyé en POST est identique à l'ID presént dans le cookie
+       if ($row->article->id ==  $id_article) {
+           // on change la quantité : on ajoute la quantité envoyé avec celle présente dans le cookie
+           $row->quantite=($row->quantite)+($quantite);
+            // on change le prix : on modifie le prix
+           $row->prix_total=$row->quantite*$row->article->prix;
+
+           $moncart->total=$moncart->total + ($quantite*$row->article->prix);
+
+
+                 
+            // on doit convertir notre objet en chaine de caractere
+            $mon_cart_encode=json_encode($moncart);
+            // il faut faire le cookie
+            setcookie("cart",$mon_cart_encode) ;
+
+           include __DIR__.'/../../template/Viewcart.php';
+           return;
+       }
+   }
+ 
+    // vous avez deja les articles enregistré dans le cookie
+    // $moncart->row_cart[]
+
+    // vous avez deja l'article que vous voulez ajouté 
+    //     $my_row_cart->article= Article::retrieveByPK($id_article);
+    
     // si non je fais le array push
     // Ajouter dans le panier
+
+    
+    $moncart->total=$moncart->total + $my_row_cart->prix_total;
     array_push($moncart->row_cart, $my_row_cart);
 
-    $moncart->total=$my_row_cart->prix_total;
 
     // on doit convertir notre objet en chaine de caractere
     $mon_cart_encode=json_encode($moncart);

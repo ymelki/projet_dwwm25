@@ -33,5 +33,5 @@
 
   </tbody>
 </table>
-
+Total : <?=$moncart->total ?>
 <?php include "footer.php"; ?>
