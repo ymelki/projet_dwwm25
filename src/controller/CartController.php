@@ -13,7 +13,7 @@ function remove(){
  
         // Si on trouve que l'ID envoyé en POST est identique à l'ID presént dans le cookie
         if ($row->article->id ==  $id) {
-            unset($row);
+            array_splice($row->article);
 
                  
             // on doit convertir notre objet en chaine de caractere
